@@ -23,4 +23,22 @@ app.use(function (req, res) {
     res.json(err);
 });
 
+// MongoDB connection
+const mongoose = require('mongoose');
+mongoose.connect(
+    'mongodb://localhost:27017/virtualstandups', { useNewUrlParser: true }
+    );
+
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', () => {
+    console.log('Connected to MongoDB');
+
+    app.listen(app.get('port'), () => {
+        console.log(`API Server Listening on port ${app.get('port')}!`);
+    });
+});
+
+
+
 
