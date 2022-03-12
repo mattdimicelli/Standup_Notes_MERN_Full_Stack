@@ -1,13 +1,6 @@
 const mongoose = require('mongoose');
 
 const noEmptyFieldValidator = [input => (input.trim().length) > 0, 'Do not leave {PATH} empty'];
-// const noEmptyFieldValidator = [
-//     function (val) {
-//         let testVal = val.trim();
-//         return (testVal.length > 0);
-//     },
-//     'Please supply a value for {PATH}'
-// ]
 
 const standupSchema = new mongoose.Schema({
     _teamMemberId: { //when accessing this, you will need to query for _teamMemberId, since the value
