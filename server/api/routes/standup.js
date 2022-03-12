@@ -1,7 +1,7 @@
 const Standup = require('../../models/standup');
 const mongoose = require('mongoose');
 
-module.exports = function(router) {  
+module.exports = router => {  
     // "router" is the express router from index.js of the api folder
 
     // GET: list of 12 newest standup meeting notes, in order from newest to oldest
