@@ -1,23 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+import Header from './components/Header';
+import Notes from './components/Notes';
 
 function App() {
+  const sampleData = [{ 
+    name: 'Mark',
+    createdOn: 'Mar 11th, 2022 (9:35 pm)',
+    project: 'Trinity Web Application',
+    yesterday: '',
+    today: 'Testing the API endpoint using Postman',
+    impediments: 'None',
+  }];
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+      <Notes notes={sampleData} />
     </div>
   );
 }
