@@ -1,27 +1,36 @@
 const express = require('express');
 const app = express();
-const api = require('./api');  // these will be routes
-const morgan = require('morgan'); // HTTP logger
-const bodyParser = require('body-parser');
+const httpLogger = require('morgan'); 
 const cors = require('cors');
+const apiRouter = require('./routes/api.js');
+const createError = require('http-errors');
 
 app.set('port', (process.env.PORT || 8081));
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 app.use(cors());
-
-app.use('/api', api);
 app.use(express.static('static'));
+app.use(httpLogger('dev'));
+app.use('/api', apiRouter);
 
-app.use(morgan('dev'));
-
-app.use(function (req, res) {
-    const err = new Error('Not Found');
-    err.status = 404;
-    res.json(err);
+// catch 404 and forward to error handler
+app.use(function (req, res, next) {
+    next(createError(404));
 });
+
+// error handler
+app.use(function(err, req, res, next) {
+    // set locals, only providing error in development
+    res.locals.message = err.message;
+    res.locals.error = req.app.get('env') === 'development' ? err : {};
+  
+    // render the error page
+    res.status(err.status || 500);
+    res.render('error');
+});
+
+
 
 // MongoDB connection
 const mongoose = require('mongoose');
@@ -29,7 +38,7 @@ const mongoose = require('mongoose');
 //     'mongodb://localhost:27017/virtualstandups', { useNewUrlParser: true }
 //     );
 mongoose.connect(
-    'mongodb+srv://mrd2689a_standup:gJBc8UcBeaMe3p@standup.xwmjq.mongodb.net/virtualstandups?retryWrites=true&w=majority',
+    process.env.MONGODB_URI,
     { useNewUrlParser: true}
 );
 
