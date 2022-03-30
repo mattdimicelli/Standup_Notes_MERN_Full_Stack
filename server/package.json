@@ -20,11 +20,7 @@
   },
   "nodemonConfig": {
     "delay": 2500,
-    "restartable": "rs",
-    "env": {
-      "PORT": 8081,
-      "MONGODB_URI": "mongodb+srv://mrd2689a_standup:gJBc8UcBeaMe3p@standup.xwmjq.mongodb.net/virtualstandups?retryWrites=true&w=majority"
-    }
+    "restartable": "rs"
   },
   "devDependencies": {
     "eslint": "^8.10.0"

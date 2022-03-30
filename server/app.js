@@ -5,6 +5,8 @@ const cors = require('cors');
 const apiRouter = require('./routes/api.js');
 const createError = require('http-errors');
 
+require('dotenv').config();
+
 app.set('port', (process.env.PORT || 8081));
 
 app.use(express.json());
